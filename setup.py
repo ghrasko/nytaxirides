@@ -11,6 +11,7 @@ setuptools.setup(
     description='NY Taxi records analysis with DataFlow',
     author='Gabor Hrasko',
     author_email='gabor@hrasko.com',
+    url='https://github.com/ghrasko/nytaxirides.git',
     install_requires=[REQUIRED_PACKAGES],
     packages=setuptools.find_packages(),
     python_requires='>=3.7',
