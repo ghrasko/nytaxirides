@@ -103,7 +103,7 @@ def run_pipeline( cfg, pipeline_args ):
                     cfg.subscription),
                 with_attributes=True,
                 timestamp_attribute=None,
-                id_label=None
+                id_label=None)
             | 'Parse JSON to Dict' >> beam.ParDo(Interpret())
             | 'Filter out enroute status' >> beam.Filter(lambda e: e['ride_status'] in ['pickup', 'dropoff'])
         )
