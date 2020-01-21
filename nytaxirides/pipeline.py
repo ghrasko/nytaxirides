@@ -97,17 +97,13 @@ def run_pipeline( cfg, pipeline_args ):
     with beam.Pipeline(argv=pipeline_args) as p:
         # Main branch of the pipeline
         p0 = ( p 
-            # It seems id_label based deduplication is not working.
-            # Anyhow, attributes don't work with DirectRunner.
             | 'Read from PubSub' >> beam.io.ReadFromPubSub(
                 subscription='projects/{}/subscriptions/{}'.format(
                     cfg.project,
                     cfg.subscription),
                 with_attributes=True,
                 timestamp_attribute=None,
-                id_label=(
-                    'ride_id' if (cfg.beam_deduplication and cfg.runner == 'DataflowRunner')
-                    else None))
+                id_label=None
             | 'Parse JSON to Dict' >> beam.ParDo(Interpret())
             | 'Filter out enroute status' >> beam.Filter(lambda e: e['ride_status'] in ['pickup', 'dropoff'])
         )

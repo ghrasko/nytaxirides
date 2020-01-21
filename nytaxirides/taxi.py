@@ -34,7 +34,6 @@ def run():
         "--num_workers", "1",
         "--max_num_workers", "2",
         "--job_name", "taxiride",
-        "--beam_deduplication",
         "--custom_deduplication",
         "--streaming",
         "--save_main_session", 
@@ -54,12 +53,8 @@ def run():
     parser.add_argument('--window_length', type=int, default=3600, help=
                             ('Length of the fix, non-shifting window in seconds. '
                             'The default is 3600 seconds (i.e. one hour)).'))
-    parser.add_argument('--beam_deduplication', action='store_true', help=
-                            ('Whether to activate Beam\'s own deduplication mechanism. '
-                            ' Seems not working anyhow.'))
     parser.add_argument('--custom_deduplication', action='store_true', help=
-                            ('Whether to filter duplicate messages with custom algorithm. '
-                            'The algorithm is very basic and not optimized yet.'))
+                            ('Whether to filter duplicate messages with custom algorithm.'))
     parser.add_argument('--loglevel', type=int, default=20, help=
                             ('Log level as integer. Standard values are as follows: '
                             'NOTSET=0, DEBUG=10, INFO=20, WARNING=30, ERROR=40, CRITICAL=50.'))
