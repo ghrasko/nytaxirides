@@ -99,36 +99,27 @@ pip list
 PROJECT FOLDER STRUCTURE
 ------------------------
 
-.\setup.py
-.\taximain.py
 .\nytaxirides\__init__.py
 .\nytaxirides\pipeline.py
 .\nytaxirides\taxi.py
 .\nytaxirides\transform.py
+.\.gitignore
+.\LICENSE
+.\README.txt
+.\setup.py
+.\taximain.bat
+.\taximain.py
 
-RUN THE PROGRAM
----------------
+RUN THE PROGRAM ON WINDOWS
+--------------------------
 
-python taximain.py <path>\\taxirides-gcp-keys.json \
-    --setup_file E:\\ghrasko\\Documents\\Develop\\ny-taxi-rides\\setup.py \ 
-    --runner DataflowRunner \
-    --project ny-taxi-rides-hg \
-    --subscription taxirides \
-    --window_length 3600 \
-    --region us-west2 \
-    --staging_location gs://ny-taxi-rides-hg/binaries \
-    --temp_location gs://ny-taxi-rides-hg/temp \
-    --num_workers 1 \
-    --max_num_workers 2 \
-    --job_name taxiride \
-    --streaming \
-    --save_main_session \
-    --purge \
-    --raw_messages \
-    --check_duplicates \
-    --beam_deduplication \
-    --custom_deduplication \
-    --loglevel 20
+This BAT file activates the Python virtual environment and runs
+the application with a rich set of command line arguments:
+
+.\taximain.bat
+
+For a comprehensive description of all the command line parameters
+check the taxi.py module.
 
 CHECK FOR DUPLICATIONS (BIGQUERY)
 ---------------------------------
