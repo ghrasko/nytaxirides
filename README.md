@@ -118,7 +118,7 @@ The number of “pickup” and “dropoff” messages were around 18 000 each be
 
 In the same one hour period (7 - 8 AM) 29 141 passengers were reported based on the “pickup” messages as shown below. This BigQuery screenshot also shows earlier 60 second long window results as well.
 
-![Passenger sum records in BigQuery](docs/bq_filtered_records.jpg)
+![Passenger sum records in BigQuery](docs/bq_passenger_count.jpg)
 
 As a cross-check we can query the passenger count summary from the saved raw data as well and it also gives the same result: 29 141.
 
