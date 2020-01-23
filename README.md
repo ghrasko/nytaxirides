@@ -2,7 +2,7 @@
 
 # Streaming data analysis with Google DataFlow
 
-This is a demonstration project that uses various Google Cloud Project functionalities (**PubSub**, **DataFlow**, **BigQuery** etc.) for the analysis of a high data volume stream: *NYC Taxi and Limousine Commission Trip Record Data*. This datastream is provided through a PubSub topic: **projects/pubsub-public-data/topics/taxirides-realtime**.
+This is a demonstration project that uses various Google Cloud Project functionalities (**Pub/Sub**, **DataFlow**, **BigQuery** etc.) for the analysis of a high data volume stream: *NYC Taxi and Limousine Commission Trip Record Data*. This datastream is provided through a publicly available Pub/Sub topic: **projects/pubsub-public-data/topics/taxirides-realtime**.
 
 The tasks are as follows:
 
@@ -29,7 +29,7 @@ To be able to overview the structure and volume of the streaming data, I set up 
 |-------|-----------------|
 |Message format|{<br>"ride_id":"ffff404d-205f-4639-a9ba-e0a1c0e59ee9",<br>"point_idx":156,<br>"latitude":40.758680000000005,<br>"longitude":-73.95870000000001,<br>"timestamp":"2020-01-19T09:50:56.57238-05:00",<br>"meter_reading":6.486022,<br>"meter_increment":0.041577064,<br>"ride_status":"pickup",<br>"passenger_count":5<br>}|
 |Message ID|Stored in ride_id item. Not unique per message but per a complete transfer|
-|Statuses|A complete transfer is broke down to three phases: pickup, enroute and dropoff. This status is stored in the ride_status item. Enroute messages are provided repeatedly during the transfer. For the pickup and dropoff messages the ride_id-ride_status pairs form a unique ID.|
+|Statuses|A complete transfer is broken down to three phases: pickup, enroute and dropoff. This status is stored in the ride_status item. Enroute messages are provided repeatedly during the transfer. For the pickup and dropoff messages the ride_id-ride_status pairs form a unique ID.|
 |Data volume|10+ million messages per hour, cca. 3000 messages per second|
 |Enroute status message frequency|> 99%|
 |Pickup & Dropoff status messages|Cca. 0.5%, i.e.  15 messages to work on per seconds|
@@ -45,12 +45,12 @@ Duplication does not seem to be a problem in this stream. In a real-life busines
 
 #### Deduplication
 
-We see that the expected frequency of duplication is very low. In fact we don’t see any duplication within the tested data flow. 
+We see that the expected frequency of duplications is very low. In fact we don’t see any duplication within the tested data flow. 
 
 There could be two sources of duplication in a Pub/Sub environment:
 
 1. Pub/Sub guaranties “at least once” delivery. It means that duplications might occur even if the source is perfect.
-2. The source itself might publish the same message repeatedly, in which case those messages are absolutely different for Pub/Sub. Even if Pub/Sub handle them perfectly, the subscribers will receive duplicates.
+2. The source itself might publish the same message repeatedly, in which case those messages are absolutely distinct from each other for Pub/Sub. Even if Pub/Sub handle them perfectly, the subscribers will receive duplicates.
 
 Deduplication of high volume streams is a challenging task. Keeping track of duplicates is difficult even if a single process handles them, but if the job is distributed, it is really difficult.
 
@@ -182,7 +182,7 @@ When launching the program using the DataFlow runner, the pipeline code is autom
 |.\taximain.bat|Optional Windows BAT file to activate the python virtual environment and run the application with a long list of command line parameters.|
 |.\taximain.py|The short code launching the application as if it would use a package.|
 	
-Besides these files one should generate and download the Service Account key file as described in the READMO.txt file.
+Besides these files one should generate and download the Service Account key file as described in the README.txt file.
 
 ## Testing
 
