@@ -3,3 +3,4 @@ __pycache__
 .vscode
 dev
 nytaxirides.egg-info
+run.bat
